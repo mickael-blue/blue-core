@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace BlueBase;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

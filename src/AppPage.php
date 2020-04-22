@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace BlueBase;
 
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
