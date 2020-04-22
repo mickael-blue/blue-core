@@ -1,5 +1,9 @@
 {
     "name": "miixdev/bluebase",
+    "type": "library",
+    "description": "Base for blue project",
+    "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Mickael Darras",
