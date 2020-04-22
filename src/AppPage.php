@@ -1,6 +1,6 @@
 <?php
 
-namespace Basic;
+namespace App;
 
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
