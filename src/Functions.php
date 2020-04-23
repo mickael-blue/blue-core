@@ -1,5 +1,7 @@
 <?php 
 
+use BlueCore\Configure;
+
 /**
  * Debug
  */
@@ -11,7 +13,7 @@ function debug($variable)
 }
 
 // Show error in development mode
-if (BlueCore\Configure::read('debug')) {
+if (Configure::read('debug')) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
