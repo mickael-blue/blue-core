@@ -13,7 +13,10 @@
     "autoload": {
       "psr-4": {
         "BlueBase\\": "src/"
-      }
+      },
+      "files": [
+        "src/Functions.php"
+      ]
     },
     "autoload-dev": {
         "psr-4": {
