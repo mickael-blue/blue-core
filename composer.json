@@ -1,5 +1,5 @@
 {
-    "name": "bluefreelance/core",
+    "name": "miixdev/bluebase",
     "type": "library",
     "description": "Core for blue project",
     "license": "MIT",
@@ -12,7 +12,7 @@
     ],
     "autoload": {
       "psr-4": {
-        "BlueBase\\": "src/"
+        "BlueCore\\": "src/"
       },
       "files": [
         "src/functions.php"
