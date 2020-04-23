@@ -1,21 +1,9 @@
 <?php
 
 namespace BlueBase;
-use Symfony\Component\Dotenv\Dotenv;
 
 class Tools
 {
-
-    public static function init() {
-        $dotenv = new Dotenv();
-        $dotenv->load(CONFIG_DIR . '.env');
-        // Initialisation du site
-        if ($_ENV['NODE_ENV'] == 'development') {
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
-        }
-    }
 
     private static function mergeConfig()
     {
