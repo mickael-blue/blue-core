@@ -7,30 +7,34 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-use Symfony\Component\Dotenv\Dotenv;
 
+/**
+ * Class for Render a page action
+ */
 class AppPage
 {
 
+    /**
+     * Action in $_GET['action']
+     */
     public $action;
 
+    /**
+     * List of TwigHelper Class
+     */
+    public $helpers;
+
+    /**
+     * Constructor 
+     */
     public function __construct()
     {
-        $this->init();
         $this->action = (isset($_GET['action']) ? $_GET['action'] : 'default');
     }
 
-    private function init() {
-        $dotenv = new Dotenv();
-        $dotenv->load(CONFIG_DIR . '.env');
-        // Initialisation du site
-        if ($_ENV['NODE_ENV'] == 'development') {
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
-        }
-    }
-
+    /**
+     * Get de name for CSS file
+     */
     private function getStylePage()
     {
         $url = ROOT_DIR . 'src/scss/' . $this->action . '.scss';
@@ -41,6 +45,9 @@ class AppPage
         }
     }
 
+    /**
+     * Get the name for JS file
+     */
     private function getJsPage()
     {
         $url = ROOT_DIR . 'src/js/' . $this->action . '.js';
@@ -52,6 +59,8 @@ class AppPage
     }
 
     /**
+     * Render of the view
+     * 
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -63,9 +72,17 @@ class AppPage
         $loader->addPath(TWIG_DIR . 'components' . DS, 'components');
         $twig = new Environment($loader);
         $twig->addExtension(new HelperTwigExtension());
+        if (!empty($this->helpers)) {
+            foreach ($this->helpers as $helper) {
+                $twig->addExtension(new $helper());
+            }
+        }
         echo $twig->render($this->getTemplate(), $this->getParams());
     }
 
+    /**
+     * Get parameters in the return action methode
+     */
     public function getParams()
     {
         $params = [];
@@ -79,6 +96,9 @@ class AppPage
         return $params;
     }
 
+    /**
+     * Get the twig template
+     */
     public function getTemplate()
     {
         $template = $this->action . '.twig';
