@@ -74,7 +74,7 @@ class Tools
      */
     public static function getBaseUrl()
     {
-        if ($_ENV['NODE_ENV'] == 'development') {
+        if (self::config('debug')) {
             return 'http://localhost:8080';
         }
         return null;

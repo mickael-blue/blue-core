@@ -1,7 +1,5 @@
 <?php 
 
-use Symfony\Component\Dotenv\Dotenv;
-
 /**
  * Debug
  */
@@ -12,12 +10,8 @@ function debug($variable)
     echo "</pre>";
 }
 
-
-$dotenv = new Dotenv();
-$dotenv->load(CONFIG_DIR . '.env');
-
 // Show error in development mode
-if ($_ENV['NODE_ENV'] == 'development') {
+if (Tools::config('debug')) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
