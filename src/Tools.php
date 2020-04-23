@@ -1,28 +1,9 @@
 <?php
 
-namespace BlueBase;
+namespace BlueCore;
 
 class Tools
 {
-
-    private static function mergeConfig()
-    {
-        $config = require ROOT_DIR . "config/config.php";
-        foreach (glob(ROOT_DIR . "config/config-*.php") as $file) {
-            $config = array_merge_recursive($config, require $file);
-        }
-        return $config;
-    }
-
-    public static function config($value = null)
-    {
-        $config = static::mergeConfig();
-        if (!is_null($value)) {
-            return $config[$value];
-        }
-        return $config;
-    }
-
     /**
      *
      */
@@ -74,7 +55,7 @@ class Tools
      */
     public static function getBaseUrl()
     {
-        if (self::config('debug')) {
+        if (Configure::read('debug')) {
             return 'http://localhost:8080';
         }
         return null;

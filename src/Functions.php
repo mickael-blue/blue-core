@@ -11,12 +11,11 @@ function debug($variable)
 }
 
 // Show error in development mode
-if (BlueBase\Tools::config('debug')) {
+if (BlueCore\Configure::read('debug')) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 }
-
 
 /**
  * Init 
