@@ -7,6 +7,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Tools;
 
 class AppPage
 {
@@ -15,6 +16,7 @@ class AppPage
 
     public function __construct()
     {
+        Tools::init();
         $this->action = (isset($_GET['action']) ? $_GET['action'] : 'default');
     }
 
