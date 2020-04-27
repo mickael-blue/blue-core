@@ -27,8 +27,9 @@ class AppPage
     /**
      * Constructor 
      */
-    public function __construct()
+    public function __construct($configDir)
     {
+        Configure::loadAll($configDir);
         $this->action = (isset($_GET['action']) ? $_GET['action'] : 'default');
     }
 
@@ -67,9 +68,9 @@ class AppPage
      */
     public function render()
     {
-        $loader = new FilesystemLoader(TWIG_DIR);
-        $loader->addPath(TWIG_DIR . 'layouts' . DS, 'layouts');
-        $loader->addPath(TWIG_DIR . 'components' . DS, 'components');
+        $loader = new FilesystemLoader(TWIG);
+        $loader->addPath(TWIG . 'layouts' . DS, 'layouts');
+        $loader->addPath(TWIG . 'components' . DS, 'components');
         $twig = new Environment($loader);
         $twig->addExtension(new HelperTwigExtension());
         if (!empty($this->helpers)) {
@@ -102,7 +103,7 @@ class AppPage
     public function getTemplate()
     {
         $template = $this->action . '.twig';
-        if (!file_exists(TWIG_DIR . $template)) {
+        if (!file_exists(TWIG . $template)) {
             $template = '404.twig';
         }
         return $template;

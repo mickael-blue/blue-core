@@ -17,8 +17,11 @@ class Configure
         return static::$_values[$var];
     }
 
-    public static function load($file)
+    public static function loadAll($base)
     {
-        static::$_values = array_merge_recursive(static::$_values, require $file);
+        static::$_values = require $base . "config.php";
+        foreach (glob($base . "config-*.php") as $file) {
+            static::$_values = array_merge_recursive(static::$_values, require $file);
+        }
     }
 }
