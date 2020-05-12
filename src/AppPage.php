@@ -30,6 +30,8 @@ class AppPage
     public function __construct($configDir)
     {
         Configure::loadAll($configDir);
+        $action = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        //debug($action);die;
         $this->action = (isset($_GET['action']) ? $_GET['action'] : 'default');
     }
 
@@ -38,12 +40,7 @@ class AppPage
      */
     private function getStylePage()
     {
-        $url = ROOT_DIR . 'src/scss/' . $this->action . '.scss';
-        if (file_exists($url)) {
-            return $this->action;
-        } else {
-            return 'app';
-        }
+        return Configure::read('baseAssets') . 'css/' . $this->action . '.css';
     }
 
     /**
@@ -51,12 +48,7 @@ class AppPage
      */
     private function getJsPage()
     {
-        $url = ROOT_DIR . 'src/js/' . $this->action . '.js';
-        if (file_exists($url)) {
-            return $this->action;
-        } else {
-            return 'app';
-        }
+        return Configure::read('baseAssets') . $this->action . '.js';
     }
 
     /**
@@ -91,9 +83,9 @@ class AppPage
         if (method_exists($this, $methodAction)) {
             $params = $this->{$methodAction}();
         }
-        $params['base_url'] = Tools::getBaseUrl();
-        $params['style'] = $this->getStylePage();
-        $params['script'] = $this->getJsPage();
+        $params['base_assets'] = Configure::read('baseAssets');
+        $params['assets_css'] = $this->getStylePage();
+        $params['assets_js'] = $this->getJsPage();
         return $params;
     }
 

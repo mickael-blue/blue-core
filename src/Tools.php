@@ -50,14 +50,4 @@ class Tools
         return mb_strtolower(preg_replace('/(?<=\\w)([A-Z])/', $delimiter . '\\1', $string));
     }
 
-    /**
-     *
-     */
-    public static function getBaseUrl()
-    {
-        if (Configure::read('debug')) {
-            return 'http://localhost:8080';
-        }
-        return null;
-    }
 }
